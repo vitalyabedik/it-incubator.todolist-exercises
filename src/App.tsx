@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Tasks from "./Tasks";
 
 
 // Hi Guys!
@@ -7,9 +8,7 @@ import './App.css';
 // -You have 2 arrays. You should create a new component TASKS, where you will render these arrays.
 // -Don't forget to assign types to our data.
 
-
-
-function App() {
+const App: React.FC =  () => {
     const data1 = {
         title: "What to do",
         tasks: [
@@ -126,7 +125,8 @@ function App() {
 
     return (
         <div className="App">
-
+            <Tasks data={data1}/>
+            <Tasks data={data2}/>
         </div>
     );
 }
