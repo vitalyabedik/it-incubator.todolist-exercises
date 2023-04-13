@@ -93,7 +93,11 @@ export function Lesson03() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask} />
+                      addTask={addTask} >
+                <div>
+                    <div>Many intresting information</div>
+                 </div>
+            </Todolist>
         </div>
     );
 }
