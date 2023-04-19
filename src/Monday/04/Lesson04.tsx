@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {Todolist} from './Todolist';
-import { v1 } from 'uuid';
+import {v1} from 'uuid';
 
 
 // Hi guys!
@@ -22,16 +22,16 @@ import { v1 } from 'uuid';
 //2.Let`s replace our if`s with  switch.
 
 
-export type FilterValuesType = "all" | "active" | "completed";
+export type FilterValuesType = 'all' | 'active' | 'completed';
 
 export const Lesson04 = () => {
 
     let [tasks, setTasks] = useState([
-        { id: v1(), title: "HTML&CSS", isDone: true },
-        { id: v1(), title: "JS", isDone: true },
-        { id: v1(), title: "ReactJS", isDone: false },
-        { id: v1(), title: "Rest API", isDone: false },
-        { id: v1(), title: "GraphQL", isDone: false },
+        {id: v1(), title: 'HTML&CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'ReactJS', isDone: false},
+        {id: v1(), title: 'Rest API', isDone: false},
+        {id: v1(), title: 'GraphQL', isDone: false},
     ]);
 
     function removeTask(id: string) {
@@ -40,48 +40,40 @@ export const Lesson04 = () => {
     }
 
     function addTask(title: string) {
-        let task = { id: v1(), title: title, isDone: false };
+        let task = {id: v1(), title: title, isDone: false};
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
 
 
+    let [filter, setFilter] = useState<FilterValuesType>('all');
 
-    let [filter, setFilter] = useState<FilterValuesType>("all");
+    const filteredTasks = () => {
+        let tasksForTodolist = tasks;
 
-
-
-    let tasksForTodolist = tasks;
-
-    if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => t.isDone === false);
-    }
-    if (filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.isDone === true);
+        switch(filter) {
+            case('active'): return tasksForTodolist = tasks.filter(t => !t.isDone)
+            case('completed'): return tasksForTodolist = tasks.filter(t => t.isDone)
+            default: return tasksForTodolist
+        }
     }
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
 
-
+    const filteredTasksData = filteredTasks()
 
     return (
         <div className="App">
             <Todolist title="What to learn"
-                      tasks={tasksForTodolist}
+                      tasks={filteredTasksData}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask} />
+                      addTask={addTask}/>
         </div>
     );
 }
-
-
-
-
-
-
 
 
 //------------------------------------------------------------------------------------------
